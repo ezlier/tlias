@@ -3,6 +3,7 @@ package com.example.pojo;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class Emp {
@@ -17,8 +18,10 @@ public class Emp {
     private String image;
     private LocalDate entryDate;
     private Integer deptId;
-    private LocalDate createdTime;
-    private LocalDate updatedTime;
+    private LocalDate createTime;
+    private LocalDate updateTime;
 
     private String deptName;
+
+    private List<EmpExpr> exprList;
 }

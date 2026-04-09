@@ -16,4 +16,6 @@ public interface EmpService {
 //    );
 
     PageResult<Emp> page(EmpQueryParam  param);
+
+    void save(Emp emp);
 }
