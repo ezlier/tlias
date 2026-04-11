@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 @RestController
 @Slf4j
@@ -38,6 +41,13 @@ public class EmpController {
     @PostMapping
     public Result save(@RequestBody Emp emp){
         empService.save(emp);
+        return Result.success();
+    }
+
+    @DeleteMapping("{ids}")
+    public Result delete(@PathVariable List<Integer> ids){
+        log.info("ids:{}", ids);
+        empService.delete(ids);
         return Result.success();
     }
 }
