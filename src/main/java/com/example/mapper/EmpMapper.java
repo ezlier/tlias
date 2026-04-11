@@ -5,9 +5,7 @@ import com.example.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -28,4 +26,8 @@ public interface EmpMapper {
     void insertEmp(Emp emp);
 
     void delete(List<Integer> ids);
+
+    Emp getInfo(Integer id);
+
+    void updateById(Emp emp);
 }

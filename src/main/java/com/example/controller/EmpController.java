@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -48,6 +47,19 @@ public class EmpController {
     public Result delete(@PathVariable List<Integer> ids){
         log.info("ids:{}", ids);
         empService.delete(ids);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result getInfo(@PathVariable Integer id){
+        log.info("{}",id);
+        Emp emp = empService.getInfo(id);
+        return Result.success(emp);
+    }
+
+    @PutMapping
+    public Result update(@RequestBody Emp emp){
+        empService.update(emp);
         return Result.success();
     }
 }
