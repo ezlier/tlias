@@ -105,4 +105,21 @@
         from emp e left join emp_expr ee on e.id = ee.emp_id
         where e.id=#{id}
     </select>
+
+    <select id="countEmpJobData" resultType="java.util.Map">
+        select
+            (case when job = 1 then '程序员'
+                when job = 2 then '测试'
+                else '其他' end ) as pos,
+            count(*) as num
+        from emp
+        group by job order by num
+    </select>
+
+    <select id="countEmpGenderData" resultType="java.util.Map">
+        select
+            if(gender = 1, '男', '女') name,
+            count(*) value
+        from emp group by gender
+    </select>
 </mapper>
