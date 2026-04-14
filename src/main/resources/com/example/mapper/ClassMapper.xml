@@ -39,15 +39,19 @@
 
 
     <select id="list" resultType="com.example.pojo.Clazz">
-        select * from clazz
+        SELECT
+        c.*,
+        e.name AS masterName  -- 关键：把emp表的name别名设为masterName，自动映射到实体类
+        FROM clazz c
+        LEFT JOIN emp e ON c.master_id = e.id  -- 关键：班级表masterId = 员工表id
         <where>
             <if test="name != null and name != ''">
-                and name like concat('%',#{name},'%')
+                AND c.name LIKE CONCAT('%',#{name},'%')
             </if>
             <if test="startDate != null and endDate != null">
-                and entry_date between #{startDate} and #{endDate}
+                AND e.entry_date BETWEEN #{startDate} AND #{endDate}
             </if>
         </where>
-        order by id
+        ORDER BY c.id
     </select>
 </mapper>

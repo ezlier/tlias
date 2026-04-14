@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.StudentsMapper">
+    <update id="updateByPrimaryKey">
+        update student
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="clazzId != null">
+                clazz_id = #{clazzId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="listStudents" resultType="com.example.pojo.Student">
+        select  s.*,c.name AS clazzName
+        from student s
+        left join clazz c on s.clazz_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                and s.name like concat('%',#{name},'%')
+            </if>
+            <if test="startDate != null and endDate != null">
+                AND s.entry_date BETWEEN #{startDate} AND #{endDate}
+            </if>
+        </where>
+    </select>
+</mapper>

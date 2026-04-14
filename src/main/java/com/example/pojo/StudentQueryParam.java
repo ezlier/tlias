@@ -8,9 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ClazzQueryParam {
+@AllArgsConstructor
+public class StudentQueryParam {
     private Integer page = 1;
     private Integer pageSize = 10;
     private String name;

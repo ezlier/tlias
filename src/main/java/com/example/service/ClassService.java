@@ -14,4 +14,6 @@ public interface ClassService {
     void update(Clazz clazz);
 
     void delete(List<Integer> ids);
+
+    Clazz getInfo(Integer id);
 }

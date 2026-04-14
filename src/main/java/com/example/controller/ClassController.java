@@ -24,6 +24,12 @@ public class ClassController {
         return Result.success(clazzList);
     }
 
+    @GetMapping("/{id}")
+    public Result getId(@PathVariable Integer id) {
+        Clazz clazz = classService.getInfo(id);
+        return Result.success(clazz);
+    }
+
     @PostMapping
     public Result save(@RequestBody Clazz clazz) {
         classService.save(clazz);

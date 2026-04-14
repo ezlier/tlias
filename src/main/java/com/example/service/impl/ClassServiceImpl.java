@@ -48,4 +48,9 @@ public class ClassServiceImpl implements ClassService {
     public void delete(List<Integer> ids) {
         classMapper.delete(ids);
     }
+
+    @Override
+    public Clazz getInfo(Integer id) {
+        return classMapper.getInfo(id);
+    }
 }
