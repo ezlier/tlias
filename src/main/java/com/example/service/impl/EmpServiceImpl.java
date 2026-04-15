@@ -5,6 +5,7 @@ import com.example.mapper.EmpMapper;
 import com.example.pojo.*;
 import com.example.service.EmpLogService;
 import com.example.service.EmpService;
+import com.example.utils.JwtUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -91,5 +94,18 @@ public class EmpServiceImpl implements EmpService {
             empExprList.forEach(empExpr -> empExpr.setEmpId(emp.getId()));
             empExprmapper.insertBatch(empExprList);
         }
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        Emp e = empMapper.selectByUsernameAndPassword(emp);
+        if (e != null) {
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", e.getId());
+            claims.put("username", e.getUsername());
+            String token = JwtUtils.generateToken(claims);
+            return new LoginInfo(e.getId(), e.getUsername(), e.getName(),token);
+        }
+        return null;
     }
 }

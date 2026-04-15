@@ -5,6 +5,7 @@ import com.example.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -35,4 +36,7 @@ public interface EmpMapper {
     List<Map<String, Object>> countEmpJobData();
 
     List<Map<String, Object>> countEmpGenderData();
+
+    @Select("select id, username, name from emp where username = #{username} and password = #{password}")
+    Emp selectByUsernameAndPassword(Emp emp);
 }
