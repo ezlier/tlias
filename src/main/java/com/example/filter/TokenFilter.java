@@ -26,8 +26,6 @@ public class TokenFilter implements Filter {
 
         String token = request.getHeader("token");
 
-        log.info("token:{}", token);
-
         if (token == null || token.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
