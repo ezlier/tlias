@@ -2,6 +2,7 @@ package com.example.aop;
 
 import com.example.mapper.OperateLogMapper;
 import com.example.pojo.OperateLog;
+import com.example.utils.CurrentHolder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -46,6 +47,6 @@ public class OperationLogAspect {
     }
 
     private Integer getCurrentUserId() {
-        return 1;
+        return CurrentHolder.getCurrentId();
     }
 }

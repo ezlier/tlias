@@ -1,6 +1,8 @@
 package com.example.filter;
 
+import com.example.utils.CurrentHolder;
 import com.example.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,12 +34,16 @@ public class TokenFilter implements Filter {
         }
 
         try {
-            JwtUtils.parseToken(token);
+            Claims claims = JwtUtils.parseToken(token);
+            Integer empId = Integer.valueOf(claims.get("id").toString());
+            CurrentHolder.setCurrentId(empId);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
 
         filterChain.doFilter(request, response);
+
+        CurrentHolder.remove();
     }
 }
